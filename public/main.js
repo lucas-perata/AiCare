@@ -5,10 +5,14 @@ function createWindow () {
   const win = new BrowserWindow({
     width: 800,
     height: 600,
+    title: "AiKer",
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      enableRemoteModule: true,
     }
   })
+
+  win.removeMenu();
 
   //load the index.html from a url
   win.loadURL('http://localhost:3000');
