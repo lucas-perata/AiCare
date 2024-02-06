@@ -75,7 +75,7 @@ const EyeCareBasic = ({onFinish}) => {
   }
 
   return (
-    <section class='bg-gray-200 flex flex-col justify-center' style={{height: "100vh"}}>
+    <section class=' flex flex-col justify-center' style={{height: "100vh"}}>
       <div>
         <div class="p-2">
           <CircularProgress size={"50vh"} value={seconds/60} max={20} color='green.400'>

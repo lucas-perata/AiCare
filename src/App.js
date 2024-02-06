@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 import "./components/EyeCareBasic/EyeCareBasic"
 import EyeCareBasic from './components/EyeCareBasic/EyeCareBasic';
 import {ChakraProvider} from "@chakra-ui/react"
-import ReactDom from "react-dom/client"
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
+import PostureCare from './components/PostureCare/PostureCare';
 
 function App() {
   return (
@@ -13,9 +12,10 @@ function App() {
       <div className="App flex" style={{ minHeight: "100vh", minWidth:"" }}>
         <BrowserRouter>
           <header style={{minWidth:"10%"}}><NavBar/></header>
-          <main style={{minWidth:"90%"}}>
+          <main className='bg-gray-150' style={{minWidth:"90%"}}>
             <Routes>
               <Route path="/eyecare" element={<EyeCareBasic/>}></Route>
+              <Route path="/posturecare" element={<PostureCare/>}></Route>
             </Routes>
           </main>
         </BrowserRouter>
