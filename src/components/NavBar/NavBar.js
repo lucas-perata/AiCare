@@ -14,7 +14,7 @@ const NavBar = () => {
                         <FaRegEye/>
                     </div>
                 </Link>
-                <Link to="/posture" className="shadow-sm text-center w-full h-16 justify-center flex flex-col" id="link-nav">
+                <Link to="/posturecare" className="shadow-sm text-center w-full h-16 justify-center flex flex-col" id="link-nav">
                     <div className="flex justify-center">
                         <BsPersonWorkspace/>
                     </div>
