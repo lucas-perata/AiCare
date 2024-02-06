@@ -7,9 +7,9 @@ import {ChakraProvider} from "@chakra-ui/react"
 function App() {
   return (
     <ChakraProvider>
-      <div className="App">
-      <EyeCareBasic>  </EyeCareBasic>
-    </div>
+      <div className="App" style={{ minHeight: "100vh" }}>
+        <EyeCareBasic>  </EyeCareBasic>
+      </div>
     </ChakraProvider>
   );
 }
