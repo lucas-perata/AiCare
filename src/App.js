@@ -6,6 +6,7 @@ import {ChakraProvider} from "@chakra-ui/react"
 import ReactDom from "react-dom/client"
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
+import PostureCare from './components/PostureCare/PostureCare';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <main style={{minWidth:"90%"}}>
             <Routes>
               <Route path="/eyecare" element={<EyeCareBasic/>}></Route>
+              <Route path="/posturecare" element={<PostureCare/>}></Route>
             </Routes>
           </main>
         </BrowserRouter>

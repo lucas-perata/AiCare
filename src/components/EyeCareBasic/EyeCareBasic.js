@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { CircularProgress, CircularProgressLabel } from '@chakra-ui/react'
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import "./EyeCareBasic.css"
+import { notifyUser } from '../helpers/NotificationHelper';
 
 const EyeCareBasic = ({onFinish}) => {
-  const electron = window.electron;
 
   const eyeCareTime = 20*60;
   const [seconds, setSeconds] = useState(eyeCareTime);
@@ -23,20 +23,12 @@ const EyeCareBasic = ({onFinish}) => {
     setIsRunning(false)
   };
 
-  const notifyUser = () => {
-    Notification.requestPermission().then(function(result){
-      new Notification("Take an eye break", {
-        body: "Look something in the distance",
-      })
-    })
-  }
-
   useEffect(() => {
     let timerId;
 
     if (seconds === 0) {
       console.log("Hola")
-      notifyUser()
+      notifyUser("Take", "Test")
       setSeconds(0)
     } else 
     if (seconds > 0 && isRunning)
