@@ -41,7 +41,6 @@ const PostureCare = () => {
     }, [seconds, isRunning]);
         
   return (
-    <section> 
       <section class='bg-gray-200 flex flex-col justify-center' style={{height: "100vh"}}>
       <div>
         <div class="p-2">
@@ -54,7 +53,6 @@ const PostureCare = () => {
           <div class="min-h-10">  {startRestartButtons(postureTime, seconds, startCountdown, isRunning)} </div>
           </div>
       </div>
-    </section>
     </section>
   )
 }
