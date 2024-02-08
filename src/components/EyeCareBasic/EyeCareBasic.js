@@ -3,69 +3,38 @@ import { CircularProgress, CircularProgressLabel } from '@chakra-ui/react'
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import "./EyeCareBasic.css"
 import { notifyUser } from '../helpers/NotificationHelper';
+import { useDispatch, useSelector } from 'react-redux';
+import { startCountdown, stopCountdown, resetCountdown, decrementSeconds } from '../redux/actions';
+import {startRestartButtons, stopResetButtons} from '../helpers/CountdownHelpers';
 
-const EyeCareBasic = ({onFinish}) => {
+const EyeCareBasic = () => {
+  const id = "countdown1"; 
+  const countdown = useSelector(state => state.countdowns[id]);
+  const dispatch = useDispatch(); 
+  const seconds = countdown.seconds; 
+  const eyeCareTime = countdown.eyeCareTime; 
+  const isRunning = countdown.isRunning; 
 
-  const eyeCareTime = 20*60;
-  const [seconds, setSeconds] = useState(eyeCareTime);
-  const [isRunning, setIsRunning] = useState(false);
-
-  const startCountdown = () => {
-    setIsRunning(true);
-  };
-
-  const stopCountdown = () => {
-    setIsRunning(false);
-  };
-
-  const resetCountdown = () => {
-    setSeconds(eyeCareTime)
-    setIsRunning(false)
-  };
+  const start = () => dispatch(startCountdown({id})); 
+  const stop = () => dispatch(stopCountdown({id})); 
+  const reset = () => dispatch(resetCountdown({ id }));
 
   useEffect(() => {
     let timerId;
-
+  
     if (seconds === 0) {
       console.log("Hola")
       notifyUser("Take", "Test")
-      setSeconds(0)
-    } else 
-    if (seconds > 0 && isRunning)
-    {
+    } else if (seconds > 0 && isRunning) {
       timerId = setInterval(() => {
-        setSeconds((prevSeconds) => prevSeconds - 1);
+        dispatch(decrementSeconds());
       }, 1000);
     }
-
+  
     return () => clearInterval(timerId);
-  }, [seconds, isRunning]);
+  }, [seconds, isRunning, dispatch, id]);
 
-  function startRestartButtons(){
-    if(seconds !== eyeCareTime && !isRunning){
-      return <Button variant="outline" colorScheme='blue' className='btn-alert' onClick={startCountdown}>Restart</Button>
-    }
-    else if(seconds === eyeCareTime)
-    {
-      return <Button colorScheme='blue' className='btn-alert' onClick={startCountdown}>Start</Button>
-    }
-  }
-
-  function stopResetButtons(){
-    if (seconds === eyeCareTime) {
-     return <ButtonGroup isDisabled> 
-      <Button colorScheme='red' onClick={stopCountdown}>Stop</Button> 
-      <Button colorScheme='red' variant="outline" onClick={resetCountdown}>Reset</Button>
-    </ButtonGroup> 
-    }
-   else if (seconds !== eyeCareTime){
-      return <ButtonGroup> 
-      <Button colorScheme='red' onClick={stopCountdown}>Stop</Button> 
-      <Button colorScheme='red' variant="outline" onClick={resetCountdown}>Reset</Button>
-      </ButtonGroup>
-   }      
-  }
-
+  
   return (
     <section class='bg-gray-200 flex flex-col justify-center' style={{height: "100vh"}}>
       <div>
@@ -75,8 +44,8 @@ const EyeCareBasic = ({onFinish}) => {
           </CircularProgress>
         </div>
           <div class="grid gap-2">
-              <div class="min-h-10">{stopResetButtons()}</div>
-              <div class="min-h-10">  {startRestartButtons()} </div>
+              <div class="min-h-10">{stopResetButtons(isRunning, eyeCareTime, seconds, stop, reset)}</div>
+              <div class="min-h-10">  {startRestartButtons(eyeCareTime, seconds, start, isRunning)} </div>
           </div>
       </div>
     </section>
